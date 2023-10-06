@@ -18,7 +18,8 @@ export class AppController {
   @Post('/gpt')
   async askToGPTKaKaoPost(@Body() body){
     console.log(body)
-    const request = body?.action?.params?.request  || 'no reqeust body'
+    // const request = body?.action?.params?.request  || 'no reqeust body'
+    const request = body?.userRequest?.utterance  || 'no reqeust body'
     const askToGPT: string = await this.appService.askToGPT(request);
 
     return {

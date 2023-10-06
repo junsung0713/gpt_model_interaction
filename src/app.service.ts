@@ -27,7 +27,7 @@ export class AppService {
     }
 
     async ask(contents: string):Promise<string>{
-      console.log(contents)
+     try{ console.log(contents)
       const params: OpenAI.Chat.ChatCompletionCreateParams = {
         messages: [{ role: 'user', content: contents }],
         model: 'gpt-3.5-turbo'
@@ -37,6 +37,12 @@ export class AppService {
     const response = chatCompletion.choices[0].message.content
 
     return response
+  } catch(e){
+      console.log(e)
+      if(e.status === 401){
+        return "GPT KEY 오류"
+      }
+    }
     }
 
 }
